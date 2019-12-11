@@ -20,14 +20,18 @@ width: 100%;
 class UserCard extends React.Component {
     constructor() {
         super()
-        this.state = ''
+        this.state = {
+            data: ""
+        }
     }
 
     componentDidMount() {
         axios.get('https://api.github.com/users/daltonwalkerdw')
             .then(result => {
                 console.log(result)
-                this.setState(result.data)
+                this.setState({
+                    data: result.data
+                })
                 console.log(this.state)
             })
             .catch(error => {
@@ -39,13 +43,13 @@ class UserCard extends React.Component {
         return (
             
             <User>
-                <h2>{this.state.name}</h2>
-                <a>link: {this.state.html_url}</a>
-                <p>Location: {this.state.location}</p>
-                <p>Bio: {this.state.bio}</p>
+                <h2>{this.state.data.name}</h2>
+                <a>link: {this.state.data.html_url}</a>
+                <p>Location: {this.state.data.location}</p>
+                <p>Bio: {this.state.data.bio}</p>
               <Followers>
-                <p>Followers: {this.state.followers}</p>
-                <p>Following: {this.state.following}</p>
+                <p>Followers: {this.state.data.followers}</p>
+                <p>Following: {this.state.data.following}</p>
               </Followers>
             </User>
         )
